@@ -1,0 +1,182 @@
+	<!--[if !IE]> -->
+
+	<script type="text/javascript">
+		window.jQuery || document.write("<script src='{{__HOST__}}/admin/js/jquery-2.0.3.min.js'>" + "<" + "script>");
+	</script>
+
+	<!-- <![endif]-->
+
+	<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='{{__HOST__}}/admin/js/jquery-1.10.2.min.js'>"+"<"+"script>");
+</script>
+<![endif]-->
+
+	<script src="{{__HOST__}}/admin/js/jquery-2.0.3.min.js"></script>
+	<script src="{{__HOST__}}/admin/js/jq-paginator.js"></script>
+	<script src="{{__HOST__}}/admin/js/bootstrap.min.js"></script>
+
+
+	<!-- ace scripts -->
+
+	<script src="{{__HOST__}}/admin/js/ace-elements.min.js"></script>
+	<script src="{{__HOST__}}/admin/js/ace.min.js"></script>
+
+
+	<script type="text/javascript">
+		jQuery(function ($) {
+
+
+			$('table th input:checkbox').on('click', function () {
+				var that = this;
+				$(this).closest('table').find('tr > td:first-child input:checkbox')
+					.each(function () {
+						this.checked = that.checked;
+						$(this).closest('tr').toggleClass('selected');
+					});
+
+			});
+
+
+			$('[data-rel="tooltip"]').tooltip({
+				placement: tooltip_placement
+			});
+
+			function tooltip_placement(context, source) {
+				var $source = $(source);
+				var $parent = $source.closest('table')
+				var off1 = $parent.offset();
+				var w1 = $parent.width();
+
+				var off2 = $source.offset();
+				var w2 = $source.width();
+
+				if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+				return 'left';
+			}
+		})
+	</script>
+
+	<script type="text/javascript">
+		//退出登录
+		$('#logOut').click(function (event) {
+			if (confirm('确定要退出登录吗？')) {
+				return true
+			} else {
+				return false
+			}
+		})
+		//切换用户状态
+		function toggleUserStatus(event, data) {
+
+			//根据样式名称设置状态值
+			if (event.className === 'icon-ok') {
+				data.status = '1'
+			} else {
+				data.status = '0'
+			}
+			$.get('{{__HOST__}}/admin/user/changeUserState', data, function (res) {
+				//如果修改状态成功
+				if (res.message) {
+					if (event.className === 'icon-ok') {
+						event.className = 'icon-remove'
+					} else {
+						event.className = 'icon-ok'
+					}
+				}
+			})
+		}
+
+		//新增用户效验
+		$('#addUserForm').submit(function (event) {
+			let username = $('#username').val().trim()
+			let password = $('#password').val().trim()
+			let repassword = $('#repassword').val().trim()
+			if (username === "" || password === "" || repassword === "") {
+				alert('用户名、密码、确认密码不能为空')
+				return false
+			} else if (password !== repassword) {
+				alert('密码与确认密码不一致')
+				return false
+			} else if (username.length < 4 || password.length < 4) {
+				alert('用户名和密码长度不能小于4')
+				return false
+			}
+			return true
+		})
+
+		//编辑用户效验
+		$('#editUserForm').submit(function (event) {
+			let password = $('#password').val().trim()
+			let repassword = $('#repassword').val().trim()
+			if (password === "" || repassword === "") {
+				alert('密码、确认密码不能为空')
+				return false
+			} else if (password !== repassword) {
+				alert('密码与确认密码不一致')
+				return false
+			} else if (username.length < 4 || password.length < 4) {
+				alert('新密码长度不能小于4')
+				return false
+			}
+			return true
+		})
+		//删除用户
+		$('#deleteUser').click(function () {
+			if (confirm('确定要删除该用户吗？')) {
+				return true
+			} else {
+				return false
+
+			}
+		})
+		//切换分类状态
+		function toggleArticleCateStatus(event, data) {
+			//根据样式名称设置状态值
+			if (event.className === 'icon-ok') {
+				data.status = '1'
+			} else {
+				data.status = '0'
+			}
+			$.get('{{__HOST__}}/admin/user/changeArticleCateState', data, function (res) {
+				//如果修改状态成功
+				if (res.message) {
+					if (event.className === 'icon-ok') {
+						event.className = 'icon-remove'
+					} else {
+						event.className = 'icon-ok'
+					}
+				}
+			})
+		}
+		//效验新增分类
+		$('#addArticleForm').submit(function () {
+			if ($('#title').val().trim() === '' || $('#des').val().trim() === '' || $('#keywords').val().trim() ===
+				'') {
+				alert('标题、关键词、描述不能为空')
+				return false
+			}
+		})
+
+		//删除分类
+		$('.deleteArticleCate').click(() => {
+			if (!confirm('确定要删除该分类吗？')) {
+				return false
+			}
+		})
+
+		//分页
+		$.get('/admin/user/count', (totalCounts) => {
+			$('#page').jqPaginator({
+				totalCounts,
+				pageSize: 2,
+				currentPage: {{current}},
+				visiblePages: 10,
+				onPageChange: function (num, type) {
+					if (type === 'change') {
+						location.href = '{{__HOST__}}/admin/user/list?current=' + num
+					}
+				}
+			});
+		})
+	</script>
