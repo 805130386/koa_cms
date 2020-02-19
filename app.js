@@ -8,7 +8,7 @@ const Koa = require('koa'),
 const app = new Koa()
 const tools = require('./module/tools')
 
-123
+
 
 //配置静态文件目录
 app.use(serve(__dirname + '/public'))
