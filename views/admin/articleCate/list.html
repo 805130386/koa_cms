@@ -101,7 +101,7 @@
 
 					<div class="page-header">
 						<h1>
-							列表
+							分类管理列表
 						</h1>
 					</div><!-- /.page-header -->
 
@@ -205,7 +205,8 @@
 												</button>
 											</a>
 											&nbsp;
-											<a href="{{__HOST__}}/admin/articleCate/delete?id={{@$value._id}}" class="deleteArticleCate">
+											<a href="{{__HOST__}}/admin/articleCate/delete?id={{@$value._id}}"
+												class="deleteArticleCate">
 												<button class="btn btn-xs btn-danger">
 													<i class="icon-trash"></i>
 												</button>
@@ -231,7 +232,35 @@
 	</div><!-- /.main-container -->
 
 	{{include 'admin/public/footer.html'}}
+	<script>
+		//切换分类状态
+		function toggleArticleCateStatus(event, data) {
+			//根据样式名称设置状态值
+			if (event.className === 'icon-ok') {
+				data.status = '1'
+			} else {
+				data.status = '0'
+			}
+			$.get('{{__HOST__}}/admin/user/changeArticleCateState', data, function (res) {
+				//如果修改状态成功
+				if (res.message) {
+					if (event.className === 'icon-ok') {
+						event.className = 'icon-remove'
+					} else {
+						event.className = 'icon-ok'
+					}
+				}
+			})
+		}
 
+
+		//删除分类
+		$('.deleteArticleCate').click(() => {
+			if (!confirm('确定要删除该分类吗？')) {
+				return false
+			}
+		})
+	</script>
 </body>
 
 </html>

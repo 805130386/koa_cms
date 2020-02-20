@@ -1,6 +1,6 @@
 const Koa = require('koa'),
     router = require('koa-router')(),
-    bodyParser = require('koa-bodyparser'),
+    koaBody = require('koa-body'),
     serve = require('koa-static'),
     render = require('koa-art-template'),
     session = require('koa-session'),
@@ -12,8 +12,15 @@ const tools = require('./module/tools')
 
 //配置静态文件目录
 app.use(serve(__dirname + '/public'))
-//post请求获取数据
-app.use(bodyParser())
+//post请求获取数据和文件上传
+
+app.use(koaBody({
+    multipart: true,
+    formidable: {
+        uploadDir: path.join(__dirname, 'public/upload'), // 设置文件上传目录
+        keepExtensions: true, // 保持文件的后缀
+    }
+}));
 //配置session
 app.keys = ['some secret hurr'];
 const CONFIG = {

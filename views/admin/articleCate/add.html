@@ -155,7 +155,16 @@
 
 	{{include 'admin/public/footer.html'}}
 
-
+	<script>
+		//效验新增分类
+		$('#addArticleForm').submit(function () {
+			if ($('#title').val().trim() === '' || $('#des').val().trim() === '' || $('#keywords').val().trim() ===
+				'') {
+				alert('标题、关键词、描述不能为空')
+				return false
+			}
+		})
+	</script>
 
 </body>
 

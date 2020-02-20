@@ -1,24 +1,17 @@
 const router = require('koa-router')()
 const Db = require('../../module/database/db')
+
+const {
+    cateList
+} = require('../../module/tools.js')
 router.get('/', async (ctx) => {
     ctx.redirect('/admin/articleCate/list')
 })
 
 router.get('/list', async (ctx) => {
     let findRes = await Db.getInstance().find('articleCate', {})
-    let topCate = findRes.filter((val) => {
-        val.children = []
-        return val.pid === '0'
-    })
-    topCate.forEach((topVal) => {
-        findRes.forEach((val) => {
-            if (topVal._id.toString() === val.pid.toString()) {
-                topVal.children.push(val)
-            }
-        })
-    })
     await ctx.render('admin/articleCate/list', {
-        list: topCate
+        list: cateList(findRes)
     })
 })
 
@@ -64,6 +57,18 @@ router.get('/edit', async (ctx) => {
         console.log(error);
     }
 })
+router.post('/doEdit', async (ctx) => {
+    const data = ctx.request.body
+    await Db.getInstance().updateOne('articleCate', {
+        _id: Db.getObjectId(data.id)
+    }, {
+        title: data.title,
+        des: data.des,
+        keywords: data.keywords,
+        pid: data.pid
+    })
+    ctx.redirect('/admin/articleCate/list')
+})
 router.get('/delete', async (ctx) => {
     let {
         id
@@ -78,4 +83,7 @@ router.get('/delete', async (ctx) => {
 
     }
 })
+
+
+
 module.exports = router

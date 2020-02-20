@@ -2,9 +2,10 @@ const router = require('koa-router')()
 const user = require('./admin/user')
 const login = require('./admin/login')
 const articleCate = require('./admin/articleCate')
+const article = require('./admin/article')
 const url = require('url')
 //配置自定义中间件
-router.use(async (ctx, next) => {    
+router.use(async (ctx, next) => {
     ctx.state['__HOST__'] = 'http://' + ctx.request.header.host
     const pathname = url.parse(ctx.url).pathname
     ctx.state.pathname = pathname
@@ -37,5 +38,6 @@ router.get('/logOut', async (ctx) => {
 router.use('/login', login.routes())
 router.use('/user', user.routes())
 router.use('/articleCate', articleCate.routes())
+router.use('/article', article.routes())
 
 module.exports = router

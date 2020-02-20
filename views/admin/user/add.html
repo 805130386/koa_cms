@@ -141,7 +141,25 @@
 
 	{{include 'admin/public/footer.html'}}
 
-
+	<script>
+		//新增用户效验
+		$('#addUserForm').submit(function (event) {
+			let username = $('#username').val().trim()
+			let password = $('#password').val().trim()
+			let repassword = $('#repassword').val().trim()
+			if (username === "" || password === "" || repassword === "") {
+				alert('用户名、密码、确认密码不能为空')
+				return false
+			} else if (password !== repassword) {
+				alert('密码与确认密码不一致')
+				return false
+			} else if (username.length < 4 || password.length < 4) {
+				alert('用户名和密码长度不能小于4')
+				return false
+			}
+			return true
+		})
+	</script>
 
 </body>
 

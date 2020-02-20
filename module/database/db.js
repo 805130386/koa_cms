@@ -39,9 +39,10 @@ class Db {
     }
     find(collectionName, data1, data2) {
         let skip
-        let limit = 2
+        let limit = 5
         if (arguments.length === 2) {
             skip = 0
+            limit = 0
         } else if (arguments.length === 3) {
             skip = (data2.current - 1) * limit
         }
