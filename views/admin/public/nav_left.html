@@ -32,7 +32,7 @@
         </ul>
     </li>
 
-    <li>
+    <li {{if pathname=='/admin/articleCate/list'||pathname=='/admin/articleCate/add'||pathname=='/admin/articleCate/edit'}} class="active" {{/if}}>
         <a href="#" class="dropdown-toggle">
             <i class="icon-list"></i>
             <span class="menu-text"> 分类管理 </span>
@@ -41,14 +41,14 @@
         </a>
 
         <ul class="submenu">
-            <li>
+            <li {{if pathname=='/admin/articleCate/list'}} class="open" {{/if}}>
                 <a href="{{__HOST__}}/admin/articleCate/list">
                     <i class="icon-double-angle-right"></i>
                     分类列表
                 </a>
             </li>
 
-            <li>
+            <li {{if pathname=='/admin/articleCate/add'}} class="open" {{/if}}>
                 <a href="{{__HOST__}}/admin/articleCate/add">
                     <i class="icon-double-angle-right"></i>
                     增加分类
@@ -57,7 +57,7 @@
         </ul>
     </li>
 
-    <li>
+    <li {{if pathname=='/admin/article/list'||pathname=='/admin/article/add'||pathname=='/admin/article/edit'}} class="active" {{/if}}>
         <a href="#" class="dropdown-toggle">
             <i class="icon-edit"></i>
             <span class="menu-text"> 内容管理 </span>
@@ -66,14 +66,14 @@
         </a>
 
         <ul class="submenu">
-            <li>
+            <li {{if pathname=='/admin/article/list'}} class="open" {{/if}}>
                 <a href="{{__HOST__}}/admin/article/list">
                     <i class="icon-double-angle-right"></i>
                     内容列表
                 </a>
             </li>
 
-            <li>
+            <li {{if pathname=='/admin/article/add'}} class="open" {{/if}}>
                 <a href="{{__HOST__}}/admin/article/add">
                     <i class="icon-double-angle-right"></i>
                     增加内容
@@ -88,24 +88,23 @@
 
 
 
-    <li>
+    <li {{if pathname=='/admin/carousel/list'||pathname=='/admin/carousel/add'||pathname=='/admin/carousel/edit'}} class="active" {{/if}}>
         <a href="#" class="dropdown-toggle">
             <i class="icon-picture"></i>
             <span class="menu-text"> 轮播图管理 </span>
-
             <b class="arrow icon-angle-down"></b>
         </a>
 
         <ul class="submenu">
-            <li>
-                <a href="#">
+            <li {{if pathname=='/admin/carousel/list'}} class="open" {{/if}}>
+                <a href="{{__HOST__}}/admin/carousel/list">
                     <i class="icon-double-angle-right"></i>
                     轮播图列表
                 </a>
             </li>
 
-            <li>
-                <a href="#">
+            <li {{if pathname=='/admin/carousel/add'}} class="open" {{/if}}>
+                <a href="{{__HOST__}}/admin/carousel/add">
                     <i class="icon-double-angle-right"></i>
                     增加轮播图
                 </a>

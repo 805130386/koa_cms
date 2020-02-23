@@ -116,6 +116,8 @@
 									<th class="letf">内容标题</th>
 									<th class="center">内容所属分类</th>
 									<th class="center">内容状态</th>
+									<th class="center">缩略图</th>
+									<th class="center">创建时间</th>
 									<th width="80px;" class="center">操作栏</th>
 								</tr>
 							</thead>
@@ -131,6 +133,16 @@
 									</td>
 									<td>
 										{{$value.status==='0'?'未审核':'已审核'}}
+									</td>
+									<td>
+										{{if $value.imgPath}}
+										<img src="{{__HOST__}}/upload/images/{{@$value.imgPath}}"
+											alt="{{@$value.imgPath}}" width="50">
+										{{/if}}
+
+									</td>
+									<td>
+									{{if $value.createTime}} {{@$value.createTime}}{{/if}}
 									</td>
 									<td>
 										<div class="visible-md visible-lg hidden-sm hidden-xs btn-group center"
@@ -176,13 +188,22 @@
 				totalCounts: data,
 				pageSize: 5,
 				visiblePages: 10,
-				currentPage: {{current}}?{{current}}:1,
-				onPageChange: function (num, type) {					
+				currentPage: {{current}} ? {{current}} : 1,
+				onPageChange: function (num, type) {
 					if (type === 'change') {
 						location.href = '{{__HOST__}}/admin/article/list?current=' + num
 					}
 				}
 			});
+		})
+		//删除内容
+
+		$('.deleteArticleCate').click(function () {
+			if (confirm('确定要删除该内容吗？')) {
+				return true
+			} else {
+				return false
+			}
 		})
 	</script>
 </body>

@@ -37,18 +37,24 @@ class Db {
             }
         })
     }
-    find(collectionName, data1, data2) {
+    find(collectionName, data1, data2, data3) {
         let skip
         let limit = 5
+        let sortType = 1
         if (arguments.length === 2) {
             skip = 0
             limit = 0
         } else if (arguments.length === 3) {
             skip = (data2.current - 1) * limit
-        }
+        } else if (arguments.length === 4) {
+            skip = (data2.current - 1) * limit
+            sortType = -1
+        }        
         return new Promise((resolve, reject) => {
             this.connect().then((db) => {
-                db.collection(collectionName).find(data1).skip(skip).limit(limit).toArray((err, res) => {
+                db.collection(collectionName).find(data1).skip(skip).limit(limit).sort({
+                    createTime: sortType
+                }).toArray((err, res) => {
                     if (err) {
                         reject(err)
                         return
