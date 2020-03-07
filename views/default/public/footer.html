@@ -1,0 +1,12 @@
+<div id="footer-wrapper">
+    <div class="footer-inner">
+      <h3>友情链接</h3>
+      <p>
+        {{each friendLinks}}
+          <a href="{{@$value.url}}">{{@$value.name}}</a>
+        {{/each}}
+      </p>
+      <p>Copyright © 2002-2015xxxxxxx 版权所有 {{system.icp}}</p>
+      <p>电话：{{system.phone}}  地址：{{system.address}}</p>
+    </div>
+  </div>

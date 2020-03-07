@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{{@detail.title}}</title>
+    <title>heder_nav-menu</title>
+    <link rel="stylesheet" type="text/css" href="{{__HOST__}}/default/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="{{__HOST__}}/default/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="{{__HOST__}}/default/css/heder_nav-menu.css" />
+    <link rel="stylesheet" type="text/css" href="{{__HOST__}}/default/css/successful_case.css" />
+</head>
+
+<body>
+    {{include './public/nav.html'}}
+    <div class="content">
+        {{@detail.content}}
+    </div>
+
+
+    <div id="main_wrapper">
+
+
+        <div class="main">
+            <ul class="clear">
+                {{each newsList}}
+                <li>
+                    <a href="{{__HOST__}}/detail?id={{@$value._id}}">
+                        {{if $value.imgPath}}
+                        <img src="{{__HOST__}}/upload/images/{{@$value.imgPath}}" />
+                        {{/if}}
+                    </a>
+                    <p>{{@$value.description}}</p>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+
+
+
+
+    </div>
+
+
+    {{include './public/footer.html'}}
+
+
+
+
+
+</body>
+
+</html>

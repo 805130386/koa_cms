@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>成功案例</title>
+	<title>heder_nav-menu</title>
+	<link rel="stylesheet" type="text/css" href="{{__HOST__}}/default/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="{{__HOST__}}/default/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="{{__HOST__}}/default/css/heder_nav-menu.css" />
+	<link rel="stylesheet" type="text/css" href="{{__HOST__}}/default/css/successful_case.css" />
+</head>
+
+<body>
+	{{include './public/nav.html'}}
+
+	<div id="header_nav-wrapper">
+		<div class="header_nav">
+			<h2>成功案例 &#160; <span>让品牌与您同在</span></h2>
+
+
+		</div>
+
+
+
+	</div>
+
+	<div id="header_title-wrapper">
+
+		<div class="header_title clear">
+			<p>
+				{{each newsTypeList}}
+				<a href="{{__HOST__}}/news?id={{@$value._id}}">{{@$value.title}}</a>
+				{{/each}}
+			</p>
+		</div>
+
+
+	</div>
+
+
+	<div id="main_wrapper">
+
+
+		<div class="main">
+			<ul class="clear">
+				{{each newsList}}
+				<li>
+					<a href="{{__HOST__}}/detail?id={{@$value._id}}">
+						{{if $value.imgPath}}
+						<img src="{{__HOST__}}/upload/images/{{@$value.imgPath}}" />
+						{{/if}}
+					</a>
+					<p>{{@$value.description}}</p>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+
+
+
+
+	</div>
+
+
+	{{include './public/footer.html'}}
+
+
+
+
+
+</body>
+
+</html>

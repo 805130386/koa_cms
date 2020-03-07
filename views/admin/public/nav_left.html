@@ -114,7 +114,7 @@
         </ul>
     </li>
 
-    <li>
+    <li {{if pathname==='/admin/friendLink/list'||pathname==='/admin/friendLink/add'||pathname==='/admin/friendLink/edit'}} class="active"  {{/if}}>
         <a href="#" class="dropdown-toggle">
             <i class="icon-paperclip"></i>
 
@@ -126,16 +126,16 @@
             <b class="arrow icon-angle-down"></b>
         </a>
 
-        <ul class="submenu">
-            <li>
-                <a href="#">
+        <ul class="submenu" >
+            <li {{if pathname==='/admin/friendLink/list'}} class="open" {{/if}}>
+                <a href="{{__HOST__}}/admin/friendLink/list">
                     <i class="icon-double-angle-right"></i>
                     友情链接列表
                 </a>
             </li>
 
-            <li>
-                <a href="#">
+            <li  {{if pathname==='/admin/friendLink/add'}} class="open" {{/if}}>
+                <a href="{{__HOST__}}/admin/friendLink/add">
                     <i class="icon-double-angle-right"></i>
                     增加友情链接
                 </a>
@@ -145,7 +145,7 @@
 
     </li>
 
-    <li>
+    <li  {{if pathname==='/admin/navLink/list'||pathname==='/admin/navLink/add'||pathname==='/admin/navLink/edit'}} class="active"  {{/if}}>
         <a href="#" class="dropdown-toggle">
             <i class="icon-list-alt"></i>
 
@@ -158,14 +158,14 @@
         </a>
 
         <ul class="submenu">
-            <li>
-                <a href="#">
+            <li {{if pathname==='/admin/navLink/add'}} class="open" {{/if}}>
+                <a href="{{__HOST__}}/admin/navLink/add">
                     <i class="icon-double-angle-right"></i>
                     增加导航
                 </a>
             </li>
-            <li>
-                <a href="#">
+            <li {{if pathname==='/admin/navLink/list'}} class="open" {{/if}}>
+                <a href="{{__HOST__}}/admin/navLink/list">
                     <i class="icon-double-angle-right"></i>
                     导航列表
                 </a>
@@ -177,8 +177,8 @@
 
 
 
-    <li>
-        <a href="index.html">
+    <li {{if pathname==='/admin/system'}} class="active" {{/if}}>
+        <a href="{{__HOST__}}/admin/system">
             <i class="icon-cog"></i>
             <span class="menu-text"> 系统设置 </span>
         </a>
